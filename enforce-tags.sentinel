@@ -1,0 +1,10 @@
+import "tfplan/v2" as tfplan
+
+# check that every resource has a 'Name' tag
+main = rule {
+  all tfplan.resources as _, resources {
+    all resources.applied as _, r {
+      "tags" in r and "Name" in r.tags
+    }
+  }
+}
