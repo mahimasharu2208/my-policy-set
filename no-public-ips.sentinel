@@ -1,0 +1,9 @@
+import "tfplan/v2" as tfplan
+
+main = rule {
+  all tfplan.resources.aws_instance as _, instances {
+    all instances.applied as _, inst {
+      not inst.associate_public_ip_address
+    }
+  }
+}
